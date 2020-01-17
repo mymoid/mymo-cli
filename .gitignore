@@ -4,7 +4,7 @@ dist
 .opt-in
 .opt-out
 .DS_Store
-
+.idea
 # these cause more harm than good
 # when working with contributors
 package-lock.json
