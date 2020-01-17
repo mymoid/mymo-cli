@@ -1,0 +1,52 @@
+# Mymo-cli
+A tool to generate things for Mymoid.
+
+[![Build Status][build-badge]][build]
+
+[![Roadmap][roadmap-badge]][roadmap]
+[![Examples][examples-badge]][examples]
+
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+[![Tweet][twitter-badge]][twitter]
+
+## The problem
+
+Managing services repositories. We want to create many services in mymoid, with many setups, dependencies ...
+The problem is keeping updated the stack to create new services from a scaffold project.
+
+## This solution
+
+This allows you to generate a new service from a scaffold node or java. 
+
+## Installation
+
+This module is distributed via [npm][npm] which is bundled with [node][node] and should
+be installed as one of your project's `devDependencies`:
+
+```
+npm install --save-dev mymo-cli
+```
+
+## Usage
+
+### CLI
+
+This module is a CLI. The best place for it is in your npm scripts
+(or [`package-scripts.js`](https://www.npmjs.com/package/p-s)):
+
+```javascript
+{
+  "scripts": {
+    "generate": "mymo-cli generate"
+  }
+}
+```
+
+#### generate
+
+This is currently the only available command. Below is a list of the available options (which are parsed with
+the amazing [yargs](https://github.com/yargs/yargs)):
+
+##### `--from-repo-url`
+ 

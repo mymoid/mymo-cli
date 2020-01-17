@@ -1,0 +1,57 @@
+{
+  "name": "mymo-cli",
+  "version": "0.0.0-semantically-released",
+  "description": "A tool to help generate things for Mymoid",
+  "main": "dist/index.js",
+  "scripts": {
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test --coverageThreshold \"{\\\"global\\\": {}}\"",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "validate": "kcd-scripts validate",
+    "precommit": "kcd-scripts precommit"
+  },
+  "bin": {
+    "mymo-cli": "dist/bin/index.js"
+  },
+  "files": ["dist"],
+  "keywords": [],
+  "author": "Denis Alonso <denjalonso@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "common-tags": "^1.4.0",
+    "glob": "^7.0.6",
+    "mkdirp": "^0.5.1",
+    "p-limit": "^1.1.0",
+    "pify": "^2.3.0",
+    "rimraf": "^2.5.4",
+    "yargs": "^7.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "directory-tree": "^1.1.0",
+    "kcd-scripts": "^0.2.3",
+    "spawn-command": "0.0.2",
+    "strip-ansi": "^4.0.0",
+    "yargs-parser": "^5.0.0"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "babel": {
+    "presets": "kcd-scripts/babel",
+    "plugins": ["transform-runtime"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/technoactivity/mymo-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/technoactivity/mymo-cli/issues"
+  },
+  "homepage": "https://github.com/technoactivity/mymo-cli#readme"
+}
