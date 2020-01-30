@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mymo-cli --help stdout 1`] = `
+"Usage: index.js
+
+Commands:
+  index.js generate  generate your service
+
+Options:
+  --version   Show version number                                      [boolean]
+  -h, --help  Show help                                                [boolean]
+"
+`;

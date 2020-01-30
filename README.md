@@ -32,8 +32,7 @@ npm install --save-dev mymo-cli
 
 ### CLI
 
-This module is a CLI. The best place for it is in your npm scripts
-(or [`package-scripts.js`](https://www.npmjs.com/package/p-s)):
+This module is a CLI. The best place for it is in your npm scripts.
 
 ```javascript
 {
