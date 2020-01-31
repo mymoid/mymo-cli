@@ -1,12 +1,19 @@
 {
   "name": "mymo-cli",
-  "version": "0.0.0-semantically-released",
+  "version": "0.0.0-development",
   "description": "A tool to help generate things for Mymoid",
   "main": "dist/index.js",
   "scripts": {
-    "start": "nps",
-    "test": "nps test",
-    "precommit": "kcd-scripts precommit"
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "format": "npm run prettier -- --write",
+    "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|css|graphql|md|mdx)\"",
+    "test": "kcd-scripts test --coverageThreshold \"{\\\"global\\\": {}}\"",
+    "test:update": "npm test -- --updateSnapshot --coverage",
+    "validate": "kcd-scripts validate",
+    "precommit": "kcd-scripts precommit",
+    "semantic-release": "semantic-release"
   },
   "bin": {
     "mymo-cli": "dist/bin/index.js"
@@ -38,7 +45,8 @@
     "prettier": "^1.19.1",
     "spawn-command": "0.0.2",
     "strip-ansi": "^4.0.0",
-    "yargs-parser": "^5.0.0"
+    "yargs-parser": "^5.0.0",
+    "semantic-release": "^17.0.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js"
@@ -57,9 +65,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/technoactivity/mymo-cli.git"
-  },
-  "bugs": {
-    "url": "https://github.com/technoactivity/mymo-cli/issues"
-  },
-  "homepage": "https://github.com/technoactivity/mymo-cli#readme"
+  }
 }
