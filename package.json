@@ -26,6 +26,7 @@
     "p-limit": "^1.1.0",
     "pify": "^2.3.0",
     "rimraf": "^2.7.1",
+    "semantic-release": "17.0.1",
     "simple-git": "^1.131.0",
     "yargs": "^15.1.0"
   },
