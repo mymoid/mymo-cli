@@ -1,38 +1,31 @@
 # Mymo-cli
+
 A tool to generate things for Mymoid.
-
-[![Build Status][build-badge]][build]
-
-[![Roadmap][roadmap-badge]][roadmap]
-[![Examples][examples-badge]][examples]
-
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
 
 ## The problem
 
-Managing services repositories. We want to create many services in mymoid, with many setups, dependencies ...
-The problem is keeping updated the stack to create new services from a scaffold project.
+Managing services repositories. We want to create many services in mymoid, with
+many setups, dependencies ... The problem is keeping updated the stack to create
+new services from a scaffold project.
 
 ## This solution
 
-This allows you to generate a new service from a scaffold node or java. 
+This allows you to generate a new service from a scaffold node or java.
 
 ## Installation
 
-This module is distributed via [npm][npm] which is bundled with [node][node] and should
-be installed as one of your project's `devDependencies`:
+This module is distributed via [npm][npm] which is bundled with [node][node] and
+should be installed as one of your project's `devDependencies`:
 
 ```
-npm install --save-dev mymo-cli
+npm install -g mymo-cli
 ```
 
 ## Usage
 
 ### CLI
 
-This module is a CLI. The best place for it is in your npm scripts.
+This module is a CLI. The good place for it is in your npm scripts.
 
 ```javascript
 {
@@ -44,8 +37,17 @@ This module is a CLI. The best place for it is in your npm scripts.
 
 #### generate
 
-This is currently the only available command. Below is a list of the available options (which are parsed with
-the amazing [yargs](https://github.com/yargs/yargs)):
+This is currently the only available command. Below is a list of the available
+options (which are parsed with the amazing
+[yargs](https://github.com/yargs/yargs)):
+
+##### `--name` (required)
+
+The name of the service. This is the directory where `mymoid-cli` clone the
+scaffold project. `mymoid-cli` create the npm package for you.
 
 ##### `--from-repo-url`
- 
+
+Defaults to mymoid pivate repository called `mymoidapis-node-scaffold`. This is
+where `myomid-cli` will look for your scaffold project. 
+Whatever you provide will be resolved as relative to where you're executing the command (`process.cwd`).
