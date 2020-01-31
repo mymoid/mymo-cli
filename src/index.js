@@ -1,9 +1,9 @@
+import * as fs from 'fs'
 import path from 'path'
 import pify from 'pify'
 import simpleGit from 'simple-git/promise'
 import rimraf from 'rimraf'
 import glob from 'glob'
-import * as fs from 'fs'
 
 function mymoCli({
   name,
@@ -37,11 +37,12 @@ function mymoCli({
     if (!node) {
       return Promise.resolve()
     }
-    let rawPackageJSON = fs.readFileSync(`${projectDir}/package.json`)
-    let parserdPackage = JSON.parse(rawPackageJSON)
-    parserdPackage.name = name
-    let data = JSON.stringify(parserdPackage, null, 2)
+    const rawPackageJSON = fs.readFileSync(`${projectDir}/package.json`)
+    const parsedPackage = JSON.parse(rawPackageJSON)
+    Object.assign(parsedPackage, {name})
+    const data = JSON.stringify(parsedPackage, null, 2)
     fs.writeFileSync(`${projectDir}/package.json`, data)
+    return Promise.resolve()
   }
 
   function getFiles() {

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import path from 'path'
 import yargs from 'yargs'
 import chalk from 'chalk'
 import {oneLine} from 'common-tags'
@@ -54,7 +53,7 @@ yargs
 function generate(options) {
   return mymoCli(options).then(
     savedFiles => {
-      if (savedFiles && !options.silentSuccess && !options.silentAll) {
+      if (!options.silentSuccess && !options.silentAll) {
         const count = savedFiles.length
         const files = `file${count === 1 ? '' : 's'}`
         const colon = `${count === 0 ? '' : ':'}`
@@ -74,16 +73,4 @@ ${savedFiles.join('\n')}
       return Promise.reject(error)
     },
   )
-}
-
-function inCwd(p) {
-  return path.resolve(process.cwd(), p)
-}
-
-function coerceToCwd(val) {
-  if (path.isAbsolute(val)) {
-    return val
-  } else {
-    return inCwd(val)
-  }
 }
