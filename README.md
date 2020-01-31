@@ -49,5 +49,6 @@ scaffold project. `mymoid-cli` create the npm package for you.
 ##### `--from-repo-url`
 
 Defaults to mymoid pivate repository called `mymoidapis-node-scaffold`. This is
-where `myomid-cli` will look for your scaffold project. 
-Whatever you provide will be resolved as relative to where you're executing the command (`process.cwd`).
+where `myomid-cli` will look for your scaffold project. Whatever you provide
+will be resolved as relative to where you're executing the command
+(`process.cwd`).
