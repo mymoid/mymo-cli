@@ -1,5 +1,5 @@
 import pify from 'pify'
-import simpleGit from 'simple-git'
+import simpleGit from 'simple-git/promise'
 import rimraf from 'rimraf'
 import * as fs from 'fs'
 
