@@ -33,7 +33,10 @@ yargs
         default: true,
         type: 'boolean',
       },
-
+      ignore: {
+        description: 'Globs you would like to ignore',
+        type: 'array',
+      },
       silentSuccess: {
         description: 'Whether to log success',
         type: 'boolean',

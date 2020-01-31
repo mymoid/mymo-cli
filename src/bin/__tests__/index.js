@@ -1,4 +1,4 @@
-import yargsParser from 'yargs-parser'
+import path from 'path'
 import spawn from 'spawn-command'
 import stripAnsi from 'strip-ansi'
 
