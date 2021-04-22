@@ -5,7 +5,7 @@ import stripAnsi from 'strip-ansi'
 const MYMO_CLI_PATH = require.resolve('../index')
 const BABEL_BIN_PATH = require.resolve('babel-cli/bin/babel-node')
 
-test('mymo-cli--help', () => {
+test('mymo-cli --help', () => {
   return runMymoCLI('--help').then(stdout => {
     expect(stdout).toMatchSnapshot('mymo-cli --help stdout')
   })

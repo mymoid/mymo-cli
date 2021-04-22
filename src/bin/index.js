@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
 import chalk from 'chalk'
+import fs from 'fs'
+import path from 'path'
 import {oneLine} from 'common-tags'
 import mymoCli from '../index'
 
@@ -17,12 +19,18 @@ yargs
       fromRepoUrl: {
         description: 'Git url scaffold repo to generate from',
         default:
-          'git@bitbucket.org:technoactivity/mymoidapis-node-scaffold.git',
+          'https://github.com/technoactivity/mymoidapis-node-scaffold.git',
       },
       node: {
         description: 'Scaffold in node',
         type: 'boolean',
         default: true,
+      },
+      orm: {
+        description: oneLine`
+        Orm/odm integration wht you want
+      `,
+        choices: ['postgres', 'mongo'],
       },
       clean: {
         description: oneLine`

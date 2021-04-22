@@ -46,6 +46,11 @@ options (which are parsed with the amazing
 The name of the service. This is the directory where `mymoid-cli` clone the
 scaffold project. `mymoid-cli` create the npm package for you.
 
+##### `--orm` (required)
+
+The name of the service. This is the directory where `mymoid-cli` clone the
+scaffold project. `mymoid-cli` create the npm package for you.
+
 ##### `--from-repo-url`
 
 Defaults to mymoid pivate repository called `mymoidapis-node-scaffold`. This is
