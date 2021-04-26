@@ -21,6 +21,7 @@ const REGEX = {
   postgres: new RegExp(getRegEx('POSTGRES'), 'g'),
   mongo: new RegExp(getRegEx('MONGO'), 'g'),
   comment: new RegExp(getRegEx('COMMENT'), 'g'),
+  msw: new RegExp(getRegEx('MSW'), 'g'),
 }
 const ORM_CONTENT = {
   postgres: () => true,
@@ -33,6 +34,7 @@ function mymoCli({
   fromRepoUrl,
   node,
   orm,
+  msw,
   clean,
   ignore = [`${name}/.git/**/*`],
 } = {}) {
@@ -44,7 +46,7 @@ function mymoCli({
     .then(updatePackageName)
     .then(getFiles)
     .then(readAllFilesAsPromise)
-    .then(createNewOrmFiles)
+    .then(createNewContentFiles)
     .then(saveFiles)
     .then(deleteCloneTmpRepo)
 
@@ -98,83 +100,62 @@ function mymoCli({
     return Promise.all(allPromises)
   }
 
+  // FIXME: dry
   // eslint-disable-next-line consistent-return
-  function createNewOrmFiles(fileObjs) {
-    if (!orm) {
-      return fileObjs.map(fileObj => {
-        return Object.assign(
-          {
-            ormContents: removeOrmContents(fileObj.contents),
-          },
-          fileObj,
-        )
-      })
-    }
-    if (orm === 'postgres') {
-      return fileObjs.map(fileObj => {
-        return Object.assign(
-          {
-            postgresContents: createPostgresContents(fileObj.contents),
-          },
-          fileObj,
-        )
-      })
-    }
-    if (orm === 'mongo') {
-      return fileObjs.map(fileObj => {
-        return Object.assign(
-          {
-            mongoContents: createMongoContents(fileObj.contents),
-          },
-          fileObj,
-        )
-      })
-    }
+  function createNewContentFiles(fileObjs) {
+    return fileObjs.map(fileObj => {
+      console.log(fileObj.file)
+      if (fileObj.file === 'clone-tmp/src/init-db.ts') {
+        debugger
+      }
+      return Object.assign(
+        {
+          newContent: createContents(fileObj.contents),
+        },
+        fileObj,
+      )
+    })
   }
 
-  function removeOrmContents(contents) {
-    return contents
+  function createContents(contents) {
+    let newContent = contents.replace(REGEX.comment, '')
+    if (orm) {
+      newContent = newContent.replace(REGEX.orm, '$1')
+      if (orm === 'postgres') {
+        newContent = newContent
+          .replace(REGEX.postgres, '$1')
+          .replace(REGEX.mongo, '')
+      }
+      if (orm === 'mongo') {
+        newContent = newContent
+          .replace(REGEX.mongo, '$1')
+          .replace(REGEX.postgres, '')
+      }
+    }
+    if (msw) {
+      newContent = newContent.replace(REGEX.msw, '$1')
+    }
+    newContent = newContent
       .replace(REGEX.orm, '')
       .replace(REGEX.postgres, '')
       .replace(REGEX.mongo, '')
-      .replace(REGEX.comment, '')
-  }
-
-  function createPostgresContents(contents) {
-    return contents
-      .replace(REGEX.orm, '$1')
-      .replace(REGEX.postgres, '$1')
-      .replace(REGEX.mongo, '')
-      .replace(REGEX.comment, '')
-  }
-
-  function createMongoContents(contents) {
-    return contents
-      .replace(REGEX.orm, '$1')
-      .replace(REGEX.mongo, '$1')
-      .replace(REGEX.postgres, '')
-      .replace(REGEX.comment, '')
+      .replace(REGEX.msw, '')
+    return newContent
   }
 
   function saveFiles(fileObjs) {
     const allPromises = fileObjs.reduce((all, fileObj) => {
-      return [...all, ...saveOrm(fileObj)]
+      return [...all, ...saveContent(fileObj)]
     }, [])
     return Promise.all(allPromises)
   }
 
-  function saveOrm({file, ormContents, postgresContents, mongoContents}) {
+  function saveContent({file, newContent}) {
     const relativeDestination = path.relative(projectCloneTmpDir, file)
     const projectDestination = path.resolve(projectDir, relativeDestination)
     return [
-      ormContents
-        ? openFileLimit(() => saveFile(projectDestination, ormContents))
-        : null,
-      postgresContents
-        ? openFileLimit(() => saveFile(projectDestination, postgresContents))
-        : null,
-      mongoContents
-        ? openFileLimit(() => saveFile(projectDestination, mongoContents))
+      newContent
+        ? openFileLimit(() => saveFile(projectDestination, newContent))
         : null,
     ].filter(Boolean) // filter out the files that weren't saved
   }

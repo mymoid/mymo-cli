@@ -32,6 +32,11 @@ yargs
       `,
         choices: ['postgres', 'mongo'],
       },
+      msw: {
+        description: 'If you want a msw dev flow',
+        type: 'boolean',
+          defaut: false
+      },
       clean: {
         description: oneLine`
         Deletes the exercises and
