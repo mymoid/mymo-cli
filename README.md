@@ -46,10 +46,17 @@ options (which are parsed with the amazing
 The name of the service. This is the directory where `mymoid-cli` clone the
 scaffold project. `mymoid-cli` create the npm package for you.
 
-##### `--orm` (required)
+##### `--orm` (optional)
 
-The name of the service. This is the directory where `mymoid-cli` clone the
-scaffold project. `mymoid-cli` create the npm package for you.
+Posible values are: **postgress** or **mongo**. This options create a typeorm integration. 
+
+##### `--msw` (optional)
+
+For external service integration.
+
+##### `--entityName` (optional)
+
+Defaults to `Entity` Replace entity name.
 
 ##### `--from-repo-url`
 

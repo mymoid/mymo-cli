@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
 import chalk from 'chalk'
-import fs from 'fs'
-import path from 'path'
 import {oneLine} from 'common-tags'
 import mymoCli from '../index'
 
@@ -32,10 +30,14 @@ yargs
       `,
         choices: ['postgres', 'mongo'],
       },
+      entityName: {
+        description: 'If orm, create an Entity',
+          default: 'Entity'
+      },
       msw: {
         description: 'If you want a msw dev flow',
         type: 'boolean',
-          defaut: false
+        defaut: false,
       },
       clean: {
         description: oneLine`

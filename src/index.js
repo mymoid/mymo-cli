@@ -34,6 +34,7 @@ function mymoCli({
   fromRepoUrl,
   node,
   orm,
+  entityName,
   msw,
   clean,
   ignore = [`${name}/.git/**/*`],
@@ -47,6 +48,7 @@ function mymoCli({
     .then(getFiles)
     .then(readAllFilesAsPromise)
     .then(createNewContentFiles)
+    .then(interpolateName)
     .then(saveFiles)
     .then(deleteCloneTmpRepo)
 
@@ -104,10 +106,7 @@ function mymoCli({
   // eslint-disable-next-line consistent-return
   function createNewContentFiles(fileObjs) {
     return fileObjs.map(fileObj => {
-      console.log(fileObj.file)
-      if (fileObj.file === 'clone-tmp/src/init-db.ts') {
-        debugger
-      }
+      console.log(fileObj.file.replace(projectCloneTmpName, ''))
       return Object.assign(
         {
           newContent: createContents(fileObj.contents),
@@ -141,6 +140,29 @@ function mymoCli({
       .replace(REGEX.mongo, '')
       .replace(REGEX.msw, '')
     return newContent
+  }
+
+  function toPascalCase(str) {
+    return str.replace(
+      /(\w)(\w*)/g,
+      (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase(),
+    )
+  }
+
+  function interpolate(contents) {
+    return contents
+      .replace(/\${projectName}/g, entityName)
+      .replace(/\${ProjectName}/g, toPascalCase(entityName))
+  }
+
+  function interpolateName(fileObjs) {
+    // FIXME: may be a solution with a template directory and tagged templates literals, similar with codege.macro in build time
+    return fileObjs.map(fileObj => {
+      return Object.assign(fileObj, {
+        newContent: interpolate(fileObj.newContent),
+        file: fileObj.file.replace(/example/i, entityName)
+      })
+    })
   }
 
   function saveFiles(fileObjs) {

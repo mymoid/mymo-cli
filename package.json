@@ -7,7 +7,7 @@
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
     "debug": "node --inspect-brk dist/bin/index.js generate --name mymoid-test --orm postgres --msw --runInBand",
-    "lint": "kcd-scripts lint",q1qq
+    "lint": "kcd-scripts lint",
     "format": "npm run prettier -- --write",
     "prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|css|graphql|md|mdx)\"",
     "test": "kcd-scripts test --coverageThreshold \"{\\\"global\\\": {}}\"",
